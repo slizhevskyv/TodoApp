@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mongo:latest
+    container_name: todo-app-db
+    ports:
+      - 27017:27017
+    restart: on-failure
+  backend:
+    container_name: todo-app-backend
+    ports:
+      - 8080:8080
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - PORT=8080
+      - MONGO_CONNECTION_URL=mongodb://db:27017/todo-app-db
+    depends_on:
+      - db
+    restart: on-failure
+  frontend:
+    container_name: todo-app-frontend
+    ports:
+      - 3000:3000
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - REACT_APP_API_ENDPOINT=http://localhost:8080/api/v1
+    depends_on:
+      - backend
+    restart: on-failure
