@@ -18,7 +18,6 @@ function App() {
 					}
 				/>
 				<Route path={RouteEnum.logIn} element={<LoginFeature />} />
-
 				<Route path="*" element={<Navigate to={RouteEnum.app} />} />
 			</Routes>
 		</AuthProvider>
