@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState } from 'react';
+import React, { createContext, useMemo, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { CircularProgress } from '@mui/material';
@@ -39,6 +39,8 @@ function AuthProvider(props: IProps) {
 	};
 
 	const logout = () => {
+		Cookies.remove(Cookie.SESSION_ID);
+
 		setUser(null);
 
 		navigate('/', { replace: true });

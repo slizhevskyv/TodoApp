@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Container, Fab, Typography } from '@mui/material';
 import { Add } from '@mui/icons-material';
-import { AddEditTodoModal, TodoList } from '../../components';
+import { AddEditTodoModal, ProfileInfo, TodoList } from '../../components';
 import { Todo } from '../../types';
 import useStyles from './styles';
 import { APIService } from '../../services';
 
 function TodoFeature() {
 	const classes = useStyles();
-	const [isAddTodoModalOpened, setAddTodoModelOpened] = useState(false);
 
+	const [isAddTodoModalOpened, setAddTodoModelOpened] = useState(false);
 	const [items, setItems] = useState<Todo[]>([]);
 	const [editedTodo, setEditedTodo] = useState<Todo | null>(null);
 
@@ -84,6 +84,7 @@ function TodoFeature() {
 
 	return (
 		<Container className={classes.container}>
+			<ProfileInfo />
 			<AddEditTodoModal
 				onUpdateHandler={onUpdateHandler}
 				isOpened={isAddTodoModalOpened}

@@ -15,12 +15,19 @@ function useSort<T extends Todo, TProp extends keyof TProp>(
 
 	const updateSortFieldConfiguration = useCallback(
 		(field: SortField) => {
-			if (sortFields[field].value === SortOrder.none) {
-				setSortFields(prevValue => ({ ...prevValue, [field]: { ...prevValue[field], value: SortOrder.desc } }));
-			} else if (sortFields[field].value === SortOrder.desc) {
-				setSortFields(prevValue => ({ ...prevValue, [field]: { ...prevValue[field], value: SortOrder.asc } }));
-			} else {
-				setSortFields(prevValue => ({ ...prevValue, [field]: { ...prevValue[field], value: SortOrder.none } }));
+			switch (sortFields[field].value) {
+				case SortOrder.none:
+					return setSortFields(prevValue => ({
+						...prevValue,
+						[field]: { ...prevValue[field], value: SortOrder.desc },
+					}));
+				case SortOrder.desc:
+					return setSortFields(prevValue => ({ ...prevValue, [field]: { ...prevValue[field], value: SortOrder.asc } }));
+				default:
+					return setSortFields(prevValue => ({
+						...prevValue,
+						[field]: { ...prevValue[field], value: SortOrder.none },
+					}));
 			}
 		},
 		[sortFields],
