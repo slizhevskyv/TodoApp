@@ -9,9 +9,18 @@ const UserSchema = new Schema<IUser, IUserModel>({
 		required: true,
 		unique: true,
 	},
-	avatarURL: {
+	firstName: {
 		type: String,
 		required: true,
+	},
+	lastName: {
+		type: String,
+		required: true,
+	},
+	email: {
+		type: String,
+		required: true,
+		unique: true,
 	},
 	sessionId: {
 		type: String,

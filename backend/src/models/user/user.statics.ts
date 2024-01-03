@@ -1,3 +1,4 @@
+import { RandomUser } from '../../integrations/RandomDataAPI/types/RandomUser';
 import { IUser, IUserModel } from './user.types';
 
 export async function findBySessionId(this: IUserModel, sessionId: string): Promise<IUser | null> {
@@ -8,15 +9,16 @@ export async function findBySessionId(this: IUserModel, sessionId: string): Prom
 	}
 }
 
-export async function createUserWith(
-	this: IUserModel,
-	randomUser: { uid: string; avatar: string },
-): Promise<IUser | null> {
+export async function createUserWith(this: IUserModel, randomUser: RandomUser): Promise<IUser | null> {
 	try {
-		const { uid, avatar } = randomUser;
+		// eslint-disable-next-line @typescript-eslint/naming-convention
+		const { uid, first_name, last_name, email } = randomUser;
+
 		const user = new this({
 			userId: uid,
-			avatarURL: avatar,
+			firstName: first_name,
+			lastName: last_name,
+			email,
 		});
 
 		return await user.save();

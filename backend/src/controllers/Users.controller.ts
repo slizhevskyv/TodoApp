@@ -19,13 +19,15 @@ const createUser = async (req: Request, res: Response) => {
 			return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(RespondWith.error('Unable to create a user.'));
 		}
 
-		const { sessionId, avatarURL } = createdUser;
+		const { sessionId, firstName, lastName, email } = createdUser;
 
 		res.cookie(Cookie.Session_ID, sessionId);
 
 		return res.status(StatusCodes.OK).json(
 			RespondWith.success({
-				avatarURL,
+				firstName,
+				lastName,
+				email,
 			}),
 		);
 	} catch (e) {
@@ -33,6 +35,6 @@ const createUser = async (req: Request, res: Response) => {
 	}
 };
 const getUser = (req: Request, res: Response) =>
-	res.status(StatusCodes.OK).json(RespondWith.success({ avatarURL: req.session?.user?.avatarURL ?? '' }));
+	res.status(StatusCodes.OK).json(RespondWith.success({ ...(req.session?.user ?? {}) }));
 
 export { createUser, getUser };

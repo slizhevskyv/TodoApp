@@ -1,5 +1,6 @@
 enum Route {
-	root = '/',
+	app = '/app',
+	logIn = '/sign-in',
 }
 
 export default Route;

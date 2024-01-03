@@ -1,0 +1,27 @@
+{
+    "root": true,
+    "extends": [
+        "airbnb",
+        "airbnb-typescript",
+        "prettier"
+    ],
+    "plugins": ["@typescript-eslint", "prettier"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "tsconfig.json"
+    },
+    "rules": {
+        "prettier/prettier": ["error", {
+            "printWidth": 120,
+            "tabWidth": 2,
+            "useTabs": true,
+            "trailingComma": "all",
+            "bracketSpacing": true,
+            "arrowParens": "avoid"
+        }],
+        "import/no-unresolved": "error",
+        "react/require-default-props": 0,
+        "react/prop-types": 0,
+        "import/no-extraneous-dependencies": 0
+    }
+}

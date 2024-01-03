@@ -1,2 +1,3 @@
-export { default as NavigationBar } from './NavigationBar';
-export { default as LoremIpsumTypography } from './LoremIpsumTypography'
+export { default as TodoList } from './TodoList';
+export { default as AddEditTodoModal } from './AddEditTodoModal';
+export { default as ProtectedRoute } from './ProtectedRoute';

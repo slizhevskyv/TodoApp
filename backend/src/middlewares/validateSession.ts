@@ -18,8 +18,13 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 	}
 
 	req.session = {
-		user,
+		user: {
+			userId: user.userId,
+			firstName: user.firstName,
+			lastName: user.lastName,
+			email: user.email,
+		},
 	};
 
-	next();
+	return next();
 };

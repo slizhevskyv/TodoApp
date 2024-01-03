@@ -1,19 +1,17 @@
 import express from 'express';
-import { validateSessionMiddleware } from '../middlewares';
-import { TrackingController, UsersController, EngagementsController } from '../controllers';
+import { firewallMiddleware, validateSessionMiddleware } from '../middlewares';
+import { TodoController, UsersController } from '../controllers';
 
 const router = express.Router();
 
 // MARK: Users
-router.post('/users', UsersController.createUser);
-router.get('/users', validateSessionMiddleware, UsersController.getUser);
+router.post('/users', firewallMiddleware, UsersController.createUser);
+router.get('/users', firewallMiddleware, validateSessionMiddleware, UsersController.getUser);
 
-// MARK: Engagements
-router.get('/engagements', validateSessionMiddleware, EngagementsController.getEngagements);
-
-// MARK: Tracking
-router.post('/tracking/users', validateSessionMiddleware, TrackingController.trackUsers);
-router.post('/tracking/engagements', validateSessionMiddleware, TrackingController.trackEngagements);
-router.get('/tracking/report', validateSessionMiddleware, TrackingController.getReport);
+// MARK: Todo
+router.post('/todos', firewallMiddleware, validateSessionMiddleware, TodoController.createTodo);
+router.get('/todos', firewallMiddleware, validateSessionMiddleware, TodoController.getTodos);
+router.put('/todos/:id', firewallMiddleware, validateSessionMiddleware, TodoController.updateTodo);
+router.delete('/todos/:id', firewallMiddleware, validateSessionMiddleware, TodoController.deleteTodo);
 
 export default router;
